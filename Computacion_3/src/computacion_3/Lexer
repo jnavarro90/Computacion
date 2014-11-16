@@ -1,0 +1,11 @@
+import static jflexnetbeans.Token.*;
+%%
+%class Lexer
+%type Token
+L = [a-zA-Z_]
+N = [0-9]
+%{
+public string lexeme;
+%}
+%%
+LL*L* { lexeme=yytext(); return ID}
