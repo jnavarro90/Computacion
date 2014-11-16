@@ -6,6 +6,14 @@ L = [a-zA-Z_]
 N = [0-9]
 %{
 public string lexeme;
+public int contador;
 %}
 %%
-LL*L* { lexeme=yytext(); return ID}
+/* Reglas lexicas*/
+
+<YYINITIAL>{
+
+L(LL)*	{contador++; lexeme=yytext(); return ID;}
+\n|\r 	{}
+.	{System.out.println("Token no valido <"+yytext()+ "> linea: " + (yyline+1) + " columna: " +(yycolumn+1));}
+}/* Fin yyinitial*/
