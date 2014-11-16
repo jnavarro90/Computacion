@@ -1,4 +1,4 @@
-package computacion_3;
+package analizador;
 
 /**
  *
