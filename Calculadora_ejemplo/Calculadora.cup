@@ -1,0 +1,32 @@
+/* ----------------------Seccion de declaraciones package e imports--------------------*/
+
+import java_cup.runtime.*;
+
+/* ----------------------Seccion componentes de codigo de usuario --------------------*/
+
+parser code {:
+
+public void report_error(String message, Object info) {
+	System.out.println ("Error sintactico");
+}
+
+:};
+
+/* ------------Declaracion de la lista de simbolos de la gramatica-----------*/
+
+terminal Integer NUM;
+terminal MAS, MENOS, PYC, PARIZQ, PARDER;
+non terminal Integer EXPR;
+non terminal S, EXPR_PART;
+
+
+/* -------------Declaracion de precedencias -----------*/
+
+precedence left MAS, MENOS;
+
+
+/* --------------Declaracion de la gramatica -----------*/
+
+S ::= S EXPR_PART | EXPR_PART;
+EXPR_PART ::= EXPR PYC ;
+EXPR ::= NUM | EXPR MAS EXPR | EXPR MENOS EXPR | PARIZQ EXPR PARDER | EXPR MAS error;
