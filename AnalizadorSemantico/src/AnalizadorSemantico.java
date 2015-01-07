@@ -9,7 +9,7 @@ import java.io.*;
 
 
 
-class AnalizadorSintactico{
+class AnalizadorSemantico{
 	
     static boolean do_debug_parse=false;
 
