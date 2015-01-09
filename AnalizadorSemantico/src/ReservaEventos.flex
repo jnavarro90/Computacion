@@ -26,8 +26,8 @@ import java_cup.runtime.*;
 /* MACROS */
 LineTerminator = \r|\n|\r\n
 WhiteSpace = [ \t\f]
-Fecha = ([0-9]|"/")+
-Hora = ([0-9]|":")+
+Fecha = ([0-9]+"/"[0-9]+"/"[0-9]+)
+Hora = ([0-9]+":"[0-9]+)
 
 /*--DECLARACIONES --*/ 
 
