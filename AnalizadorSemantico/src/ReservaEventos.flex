@@ -54,7 +54,7 @@ private Symbol symbol(int type,Object value){
 "lista_espacios"        {System.out.print("lista_espacios ");return symbol(sym.ESP);}
 "{"                     {System.out.print("{ ");return symbol(sym.LLAIZQ);}
 "}"                     {System.out.print(" }\n");return symbol(sym.LLADER);}
-[a-zA-Z|ñ|Ñ|_|([0-9]*)]+        {System.out.print(" Cadena ");return symbol(sym.CAD);}
+[a-zA-Z|ñ|Ñ|_|([0-9]*)]+        {Datos.addEspacio(yytext());return symbol(sym.CAD);}
 ","                     {System.out.print(", ");return symbol(sym.COMA);}
 
 {WhiteSpace}            { /* ignorar */ }
@@ -69,7 +69,7 @@ private Symbol symbol(int type,Object value){
 "lista_tipos"           {System.out.print("lista_tipos");return symbol(sym.TIP);}
 "{"                     {System.out.print("{ ");return symbol(sym.LLAIZQ);}
 "}"                     {System.out.print(" }\n");return symbol(sym.LLADER);}
-[a-zA-Z|ñ|Ñ|_|([0-9]*)]+        {System.out.print(" Cadena ");return symbol(sym.CAD);}
+[a-zA-Z|ñ|Ñ|_|([0-9]*)]+        {Datos.addTipo(yytext());return symbol(sym.CAD);}
 ","                     {System.out.print(", ");return symbol(sym.COMA);}
 
 
@@ -86,8 +86,7 @@ private Symbol symbol(int type,Object value){
 "{"                     {System.out.print("{ ");return symbol(sym.LLAIZQ);}
 "}"                     {System.out.print(" }\n");return symbol(sym.LLADER);}
 [a-zA-Z|ñ|Ñ|_|([0-9]*)]+       {System.out.print(" Cadena ");return symbol(sym.CAD);}
-{Fecha}                {System.out.print(" Fecha ");return symbol(sym.FECHA);}
-{Hora}                    {System.out.print(" Hora ");return symbol(sym.HORA);}
+{Fecha}{WhiteSpace}{Hora}              {System.out.print(" Fecha y hora");return symbol(sym.FYH);}
 ","                     {System.out.print(", ");return symbol(sym.COMA);}
 ";"                     {System.out.print("; ");return symbol(sym.PYC);}
 "=="                    {System.out.print(" == ");return symbol(sym.SEPARADOR);}

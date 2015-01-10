@@ -10,12 +10,12 @@ import java.io.*;
 
 
 class AnalizadorSemantico{
-	
+    public static Datos datos = new Datos();
     static boolean do_debug_parse=false;
 
     static public void main(String[]args)throws java.io.IOException{
         
-        
+        datos.start();
         parser parser_obj = new parser(new analex(new FileReader(args[0])));
 
         Symbol parse_tree = null;
