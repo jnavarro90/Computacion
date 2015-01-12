@@ -352,7 +352,20 @@ class CUP$parser$actions {
           case 14: // EXPR_EVE ::= CAD SEPARADOR CAD SEPARADOR CAD SEPARADOR FYH SEPARADOR FYH PYC 
             {
               Object RESULT =null;
-
+		int cespleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).left;
+		int cespright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).right;
+		Object cesp = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
+		int ctipleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
+		int ctipright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
+		Object ctip = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
+		 
+if(!Datos.existeEspacio((String) cesp)){
+    parser.report_error("No existe ese espacio.",cesp);
+}
+if(!Datos.existeTipo((String) ctip)){
+    parser.report_error("No existe ese tipo.",ctip);
+}
+ 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPR_EVE",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

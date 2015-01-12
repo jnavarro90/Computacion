@@ -3,5 +3,5 @@ lista_tipos{ Clases_GII , Clases_GIEA , TFG, Reuniones }
 lista_eventos{
     Lectura TFG Juan Fernandez == TFG ==Aula_grados == 
 05/12/2014 10:00 == 05/12/2014 11:00; 
-    Reunion Comision Docencia == Reuniones == Aula_mulriusos == 
+    Reunion Comision Docencia == Reuniones == Aula_multiusos == 
 10/12/2014 12:00 == 10/12/2014 13:00;}
