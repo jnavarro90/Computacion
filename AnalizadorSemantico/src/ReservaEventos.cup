@@ -2,7 +2,9 @@
 
 import java_cup.runtime.*;
 import java.io.IOException;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.DateFormat;
 /* ----------------------Seccion componentes de codigo de usuario --------------------*/
 
 parser code {:
@@ -75,7 +77,8 @@ parser code {:
 :};
 /* ------------Declaracion de la lista de simbolos de la gramatica-----------*/
 
-terminal ESP, LLAIZQ, LLADER, COMA, TIP, EVE, CAD, PYC, SEPARADOR, FYH;
+terminal LLAIZQ, LLADER, COMA, PYC, SEPARADOR;
+terminal String ESP, TIP, EVE, CAD, FYH;
 non terminal S, LISTA_ESP, EXPR_ESP, LISTA_TIP, EXPR_TIP, LISTA_EVE, LINEA_EVE, EXPR_EVE;
 
 precedence left ESP, TIP, EVE;
@@ -84,17 +87,30 @@ precedence left ESP, TIP, EVE;
 
 S ::= LISTA_ESP LISTA_TIP LISTA_EVE;
 LISTA_ESP ::= ESP LLAIZQ EXPR_ESP;
-EXPR_ESP ::= CAD LLADER | CAD COMA EXPR_ESP | error LLADER;
+EXPR_ESP ::= CAD LLADER | CAD COMA EXPR_ESP;
 LISTA_TIP ::= TIP LLAIZQ EXPR_TIP;
-EXPR_TIP ::= CAD LLADER | CAD COMA EXPR_TIP | error LLADER;
+EXPR_TIP ::= CAD LLADER | CAD COMA EXPR_TIP;
 LISTA_EVE ::= EVE LLAIZQ LINEA_EVE;
 LINEA_EVE ::= EXPR_EVE LLADER | EXPR_EVE LINEA_EVE;
-EXPR_EVE ::= CAD EXPR_EVE | CAD SEPARADOR CAD:cesp SEPARADOR CAD:ctip SEPARADOR FYH SEPARADOR FYH PYC {: 
-if(!Datos.existeEspacio(cesp)){
-    parser.report_error("No existe ese espacio.",cesp);
+EXPR_EVE ::= CAD EXPR_EVE | CAD SEPARADOR CAD:ctip SEPARADOR CAD:cesp SEPARADOR FYH:fechaInicio SEPARADOR FYH:fechaFin PYC {:
+String e = (String)cesp;
+String t = (String)ctip;
+DateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+formato.setLenient(false);
+try{
+Date dateInicio = formato.parse(fechaInicio);
+Date dateFin = formato.parse(fechaFin);
+if(dateFin.before(dateInicio)){
+    parser.report_error("La fecha de fin de reserva es anterior a la fecha de inicio", fechaFin);
 }
-if(!Datos.existeTipo(ctip)){
-    parser.report_error("No existe ese tipo.",ctip);
+}catch (Exception exception){
+    parser.report_error("El formato de la fecha es incorrecto", fechaInicio);
+}
+if(!Datos.existeEspacio(e)){
+    parser.report_error("No existe el espacio "+e+".",cesp);
+}
+if(!Datos.existeTipo(t)){
+    parser.report_error("No existe el tipo "+t+".",ctip);
 }
  :}
 | error PYC;

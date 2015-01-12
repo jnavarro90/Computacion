@@ -6,22 +6,27 @@ import java.util.ArrayList;
  */
 public class Datos extends Thread{
 
-    private static ArrayList<String> listaTipos;
-    private static ArrayList<String> listaEspacios;
+    private static ArrayList<Tipo> listaTipos;
+    private static ArrayList<Espacio> listaEspacios;
+    
     public Datos() {
-        listaTipos = new ArrayList<String>();
-        listaEspacios = new ArrayList<String>();
+        listaTipos = new ArrayList<Tipo>();
+        listaEspacios = new ArrayList<Espacio>();
     }
     public static boolean existeTipo(String tipo){
-        return listaTipos.contains(tipo.trim());
+        Tipo t = new Tipo(tipo); 
+        return listaTipos.contains(t);
     }
     public static boolean existeEspacio(String espacio){
-        return listaEspacios.contains(espacio.trim());
+        Espacio e = new Espacio(espacio);
+        return listaEspacios.contains(e);
     }
     public static void addTipo(String tipo){
-        listaTipos.add(new String(tipo.trim()));
+        listaTipos.add(new Tipo(tipo));
+
     }
     public static void addEspacio(String espacio){
-        listaEspacios.add(new String(espacio.trim()));
+        listaEspacios.add(new  Espacio(espacio));
+
     }
 }

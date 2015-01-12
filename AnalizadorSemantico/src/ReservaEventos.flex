@@ -51,11 +51,11 @@ private Symbol symbol(int type,Object value){
 /* ------------------------Seccion de reglaslexicas----------------------*/
 <YYINITIAL> {
 
-"lista_espacios"        {System.out.print("lista_espacios ");return symbol(sym.ESP);}
-"{"                     {System.out.print("{ ");return symbol(sym.LLAIZQ);}
-"}"                     {System.out.print(" }\n");return symbol(sym.LLADER);}
-[a-zA-Z|ñ|Ñ|_|([0-9]*)]+        {Datos.addEspacio(yytext());return symbol(sym.CAD);}
-","                     {System.out.print(", ");return symbol(sym.COMA);}
+"lista_espacios"        {return symbol(sym.ESP);}
+"{"                     {return symbol(sym.LLAIZQ);}
+"}"                     {return symbol(sym.LLADER);}
+[a-zA-Z|ñ|Ñ|_|([0-9]*)]+        {Datos.addEspacio(new String (new String (yytext())));return symbol(sym.CAD, new String (yytext()));}
+","                     {return symbol(sym.COMA);}
 
 {WhiteSpace}            { /* ignorar */ }
 {LineTerminator}	{ yybegin(TIPOS); }
@@ -66,11 +66,11 @@ private Symbol symbol(int type,Object value){
 }/* fin YYinitial */
 <TIPOS>{
 
-"lista_tipos"           {System.out.print("lista_tipos");return symbol(sym.TIP);}
-"{"                     {System.out.print("{ ");return symbol(sym.LLAIZQ);}
-"}"                     {System.out.print(" }\n");return symbol(sym.LLADER);}
-[a-zA-Z|ñ|Ñ|_|([0-9]*)]+        {Datos.addTipo(yytext());return symbol(sym.CAD);}
-","                     {System.out.print(", ");return symbol(sym.COMA);}
+"lista_tipos"           {return symbol(sym.TIP);}
+"{"                     {return symbol(sym.LLAIZQ);}
+"}"                     {return symbol(sym.LLADER);}
+[a-zA-Z|ñ|Ñ|_|([0-9]*)]+        {Datos.addTipo(new String (yytext()));return symbol(sym.CAD, new String (yytext()));}
+","                     {return symbol(sym.COMA);}
 
 
 {WhiteSpace}            { /* ignorar */ }
@@ -82,14 +82,14 @@ private Symbol symbol(int type,Object value){
 
 <EVENTOS>{
 
-"lista_eventos"           {System.out.print("lista_eventos");return symbol(sym.EVE);}
-"{"                     {System.out.print("{ ");return symbol(sym.LLAIZQ);}
-"}"                     {System.out.print(" }\n");return symbol(sym.LLADER);}
-[a-zA-Z|ñ|Ñ|_|([0-9]*)]+       {System.out.print(" Cadena ");return symbol(sym.CAD);}
-{Fecha}{WhiteSpace}{Hora}              {System.out.print(" Fecha y hora");return symbol(sym.FYH);}
-","                     {System.out.print(", ");return symbol(sym.COMA);}
-";"                     {System.out.print("; ");return symbol(sym.PYC);}
-"=="                    {System.out.print(" == ");return symbol(sym.SEPARADOR);}
+"lista_eventos"           {return symbol(sym.EVE);}
+"{"                     {return symbol(sym.LLAIZQ);}
+"}"                     {return symbol(sym.LLADER);}
+[a-zA-Z|ñ|Ñ|_|([0-9]*)]+       {return symbol(sym.CAD, new String (yytext()));}
+{Fecha}{WhiteSpace}{Hora}              {return symbol(sym.FYH, new String (yytext()));}
+","                     {return symbol(sym.COMA);}
+";"                     {return symbol(sym.PYC);}
+"=="                    {return symbol(sym.SEPARADOR);}
 
 {WhiteSpace}            { /* ignorar */ }
 {LineTerminator}	{ /* ignorar*/ }
